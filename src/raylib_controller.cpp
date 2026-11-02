@@ -1,5 +1,7 @@
 #include "raylib_controller.hpp"
 #include "raylib.h"
+#include "board_layout.hpp"
+#include <iostream>
 
 namespace FrogToad {
 	void RaylibController::handleInput(BoardModel& model) {
@@ -31,7 +33,10 @@ namespace FrogToad {
 			model.reset();
 		} 
 		else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-
+			std::optional<int> index = BoardLayout::cellAt(GetMousePosition());
+			if (index != std::nullopt) {
+				model.tryMove(index.value());
+			}
 		}
 		return;
 	}

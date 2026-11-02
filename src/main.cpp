@@ -25,12 +25,12 @@ namespace FrogToad {
         BoardModel model;
         RaylibController controller;
 
-        InitWindow(RaylibView::windowW(), RaylibView::windowH(), "Toads & Frogs - Raylib");
         SetTargetFPS(60);
 
         {   // Open a scope to control the lifetime of our RaylibView. 
             // The View's textures must live entirely within the Window's lifetime.
             RaylibView view;
+            InitWindow(view.windowW(), view.windowH(), "Toads & Frogs - Raylib");
 
             while (!WindowShouldClose()) {
                 controller.handleInput(model);

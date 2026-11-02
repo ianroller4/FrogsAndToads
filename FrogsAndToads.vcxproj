@@ -298,6 +298,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="board_layout.hpp" />
     <ClInclude Include="src\ansi_view.hpp" />
     <ClInclude Include="src\board_model.hpp" />
     <ClInclude Include="src\console_controller.hpp" />
@@ -309,6 +310,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ansi_view.cpp" />
+    <ClCompile Include="src\board_layout.cpp" />
     <ClCompile Include="src\board_model.cpp" />
     <ClCompile Include="src\console_controller.cpp" />
     <ClCompile Include="src\console_view.cpp" />
