@@ -39,7 +39,7 @@
     <ClInclude Include="src\resource_dir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="board_layout.hpp">
+    <ClInclude Include="src\board_layout.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

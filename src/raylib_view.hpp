@@ -1,6 +1,7 @@
 #pragma once
 #include "interfaces.hpp"
 #include "raylib.h"
+#include <string>
 
 namespace FrogToad {
     /**

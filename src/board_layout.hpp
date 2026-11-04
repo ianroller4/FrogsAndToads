@@ -11,7 +11,7 @@ namespace FrogToad {
     struct BoardLayout {
         static constexpr float CellSize = 80.0f; // Width and height of each cell in pixels.
         static constexpr float Left = 20.0f;     // Window x coord of the board's left edge.
-        static constexpr float Top = 80.0f;      // Window y coord of the board's top edge.
+        static constexpr float Top = 120.0f;      // Window y coord of the board's top edge.
 
         /** @brief Raylib screen rectangle that perfectly wraps all N cells. */
         static Rectangle board();

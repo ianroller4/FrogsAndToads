@@ -7,31 +7,21 @@ namespace FrogToad {
 	void RaylibController::handleInput(BoardModel& model) {
 		// TODO (student): Implement non-blocking keyboard input.
 
-		// Support 1 - 7 and r
-		if (IsKeyDown(KEY_ONE)) {
-			model.tryMove(0);
-		} 
-		else if (IsKeyDown(KEY_TWO)) {
-			model.tryMove(1);
-		}
-		else if (IsKeyDown(KEY_THREE)) {
-			model.tryMove(2);
-		}
-		else if (IsKeyDown(KEY_FOUR)) {
-			model.tryMove(3);
-		}
-		else if (IsKeyDown(KEY_FIVE)) {
-			model.tryMove(4);
-		}
-		else if (IsKeyDown(KEY_SIX)) {
-			model.tryMove(5);
-		}
-		else if (IsKeyDown(KEY_SEVEN)) {
-			model.tryMove(6);
-		} 
-		else if (IsKeyDown(KEY_R)) {
+		const int key = GetKeyPressed();
+		int keyIndex = 0;
+
+		if (key == KEY_R) {
 			model.reset();
-		} 
+			return;
+		}
+
+		// Ensures index is mapped properly as for example KEY_ONE = 49 so minus KEY_ZERO gets 1 
+		// and then minus 1 again gets the proper array index
+		keyIndex = key - KEY_ZERO - 1;
+
+		if (keyIndex >= 0 && keyIndex < BoardModel::BoardSize) {
+			model.tryMove(keyIndex);
+		}
 		else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 			std::optional<int> index = BoardLayout::cellAt(GetMousePosition());
 			if (index != std::nullopt) {
