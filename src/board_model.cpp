@@ -15,11 +15,14 @@ namespace FrogToad {
         // TODO (student): Use canMove() to detect when no legal moves remain.
         // Check for a solution first: the solved board also has no legal moves.
 
+        // Loop through cells and check if can move (we check for can move as this way if there
+        // is a playable move we exit early and do not always have to go through the whole board
         for (int i = 0; i < BoardSize; i++) {
             if (canMove(i)) {
                 return GameState::Playing;
             }
         }
+        // Looped through board without finding playable therefore we lost
         return GameState::Lost;
     }
 

@@ -3,7 +3,7 @@
 
 namespace FrogToad {
 	void RaylibView::draw(const BoardModel& model) {
-		ClearBackground(RAYWHITE);
+		ClearBackground(SKYBLUE);
 		// TODO: Draw the board and game status.
 		int leftBuffer = BoardLayout::Left;
 		int topBuffer = BoardLayout::Top;
@@ -21,11 +21,14 @@ namespace FrogToad {
 
 		int boxSize = BoardLayout::CellSize;
 
+		// Draw Background Box
+		DrawRectangle(leftBuffer, topBuffer, boxSize * model.BoardSize, boxSize, SKYBLUE);
+
 		Vector2 mp = GetMousePosition();
 		std::optional<int> index = BoardLayout::cellAt(mp);
 		if (index != std::nullopt) {
 			Rectangle r = BoardLayout::cellRect(index.value());
-			DrawRectangleRec(r, YELLOW);
+			DrawRectangleRec(r, ORANGE);
 		}
 
 		// Draw Box and Numbers
@@ -36,17 +39,37 @@ namespace FrogToad {
 		}
 
 		// Draw Frogs and Toads
-		int circleRadius = windowW() / 20;
+		int lilyPadRadius = boxSize * 0.75;
+		int circleRadius = boxSize / 4;
 		int y = topBuffer + boxSize / 2;
 
+
 		for (int i = 0; i < model.BoardSize; i++) {
+			int x = i * boxSize + boxSize / 2 + leftBuffer;
+			DrawCircle(x, y, lilyPadRadius / 2, DARKGREEN);
 			if (model.cellAt(i) == BoardModel::Cell::Frog) {
-				int x = i * boxSize + boxSize / 2 + leftBuffer;
-				DrawCircle(x, y, circleRadius, RED);
+				// Frog Body
+				DrawCircle(x - circleRadius / 2, y, circleRadius * 0.75, GREEN);
+				// Frog Eye 1
+				DrawCircle(x + circleRadius * 0.25, y + circleRadius * 0.5, circleRadius * 0.5, GREEN);
+				DrawCircle(x + circleRadius * 0.25, y + circleRadius * 0.5, circleRadius * 0.25, WHITE);
+				DrawCircle(x + circleRadius * 0.25, y + circleRadius * 0.5, circleRadius * 0.1, BLACK);
+				// Frog Eye 2
+				DrawCircle(x + circleRadius * 0.25, y - circleRadius * 0.5, circleRadius * 0.5, GREEN);
+				DrawCircle(x + circleRadius * 0.25, y - circleRadius * 0.5, circleRadius * 0.25, WHITE);
+				DrawCircle(x + circleRadius * 0.25, y - circleRadius * 0.5, circleRadius * 0.1, BLACK);
 			}
 			else if (model.cellAt(i) == BoardModel::Cell::Toad) {
-				int x = i * boxSize + boxSize / 2 + leftBuffer;
-				DrawCircle(x, y, circleRadius, BLUE);
+				// Toad Body
+				DrawCircle(x + circleRadius / 2, y, circleRadius * 0.75, BROWN);
+				// Toad Eye 1
+				DrawCircle(x - circleRadius * 0.25, y + circleRadius * 0.5, circleRadius * 0.5, BROWN);
+				DrawCircle(x - circleRadius * 0.25, y + circleRadius * 0.5, circleRadius * 0.25, WHITE);
+				DrawCircle(x - circleRadius * 0.25, y + circleRadius * 0.5, circleRadius * 0.1, BLACK);
+				// Toad Eye 2
+				DrawCircle(x - circleRadius * 0.25, y - circleRadius * 0.5, circleRadius * 0.5, BROWN);
+				DrawCircle(x - circleRadius * 0.25, y - circleRadius * 0.5, circleRadius * 0.25, WHITE);
+				DrawCircle(x - circleRadius * 0.25, y - circleRadius * 0.5, circleRadius * 0.1, BLACK);
 			}
 		}
 
