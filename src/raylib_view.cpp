@@ -5,25 +5,29 @@ namespace FrogToad {
 	void RaylibView::draw(const BoardModel& model) {
 		ClearBackground(SKYBLUE);
 		// TODO: Draw the board and game status.
-		int leftBuffer = BoardLayout::Left;
-		int topBuffer = BoardLayout::Top;
-		int textBuffer = 20;
-		int fontSize = windowW() / 20;
+		int leftBuffer = BoardLayout::Left; // Gap for x drawing
+		int topBuffer = BoardLayout::Top; // Gap for y drawing
+		int textBuffer = 20; // Gap for text from top
+		int fontSize = windowW() / 20; // Font size
 
-		// Draw Text
+		// Draw Game Title
 		DrawText("Toads & Frogs", leftBuffer, textBuffer, fontSize, BLACK);
 
-		// 1 - 7 cannot be hard coded
+		// Build string for controls based on board size
 		std::string controlsText = "1 - ";
 		controlsText += std::to_string(BoardModel::BoardSize);
 		controlsText += " = Move Index; R = Restart";
+
+		// Draw Game Controls
 		DrawText(controlsText.c_str(), leftBuffer, textBuffer + fontSize * 1.5, fontSize, BLACK);
 
+		// Get cell size for rectangles
 		int boxSize = BoardLayout::CellSize;
 
 		// Draw Background Box
 		DrawRectangle(leftBuffer, topBuffer, boxSize * model.BoardSize, boxSize, SKYBLUE);
 
+		// Determine if mouse is above a cell
 		Vector2 mp = GetMousePosition();
 		std::optional<int> index = BoardLayout::cellAt(mp);
 		if (index != std::nullopt) {
@@ -38,12 +42,12 @@ namespace FrogToad {
 			DrawText(std::to_string(i + 1).c_str(), r.x + r.width / 2 - fontSize/5, r.y + r.height * 1.1, fontSize, BLACK);
 		}
 
-		// Draw Frogs and Toads
+		// Frog, toads, and lilypad settings
 		int lilyPadRadius = boxSize * 0.75;
 		int circleRadius = boxSize / 4;
 		int y = topBuffer + boxSize / 2;
 
-
+		// Draw Frogs and Toads
 		for (int i = 0; i < model.BoardSize; i++) {
 			int x = i * boxSize + boxSize / 2 + leftBuffer;
 			DrawCircle(x, y, lilyPadRadius / 2, DARKGREEN);
